@@ -26,12 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={inter.variable}
+        className={`${inter.variable} antialiased`}
       >
         <Theme accentColor="teal">
           <NavBar />
           <main className="p-5">{children}</main>
-          <ThemePanel/>
         </Theme>
       </body>
     </html>
