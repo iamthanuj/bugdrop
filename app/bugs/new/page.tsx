@@ -3,11 +3,14 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { useForm, Controller } from "react-hook-form";
-import { TextField, Button, Callout,  } from "@radix-ui/themes";
+import { TextField, Button, Callout, Text,  } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import "easymde/dist/easymde.min.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {createIssueSchema} from "@/app/validationSchemas"
+import {z} from "zod";
 
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
@@ -15,15 +18,15 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   loading: () => <p>Loading...</p>,
 });
 
-interface BugForm {
-  title: string;
-  description: string;
-}
+
+type BugForm = z.infer<typeof createIssueSchema>
 
 const NewBugPage = () => {
   const [errorShow, setErrorShow] = useState("");
   const router = useRouter();
-  const { control, register, handleSubmit } = useForm<BugForm>();
+  const { control, register, handleSubmit, formState:{ errors } } = useForm<BugForm>({
+    resolver : zodResolver(createIssueSchema)
+  });
 
   return (
     <div className="max-w-xl space-y-3">
@@ -53,6 +56,7 @@ const NewBugPage = () => {
           placeholder="Title"
           {...register("title")}
         />
+        {errors.title && <Text color="red" as="p" >{errors.title.message}</Text>}
         <Controller
           name="description"
           control={control}
@@ -60,6 +64,7 @@ const NewBugPage = () => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
+        {errors.description && <Text color="red" as="p">{errors.description.message}</Text>}
         <Button>Submit New Bug</Button>
       </form>
     </div>
