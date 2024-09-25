@@ -10,7 +10,7 @@ import Image from 'next/image'
 
 const NavBar = () => {
 
-    const pathName = usePathname();
+    const pathName = usePathname();``
 
     const links = [
         {label: "Dashboard", href:'/'},
