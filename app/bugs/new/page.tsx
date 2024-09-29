@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {createIssueSchema} from "@/app/validationSchemas"
 import {z} from "zod";
+import ErrorMessage from "@/app/components/ErrorMessage";
 
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
@@ -56,7 +57,7 @@ const NewBugPage = () => {
           placeholder="Title"
           {...register("title")}
         />
-        {errors.title && <Text color="red" as="p" >{errors.title.message}</Text>}
+        {<ErrorMessage>{errors.title?.message}</ErrorMessage>}
         <Controller
           name="description"
           control={control}
@@ -64,7 +65,7 @@ const NewBugPage = () => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-        {errors.description && <Text color="red" as="p">{errors.description.message}</Text>}
+        {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
         <Button>Submit New Bug</Button>
       </form>
     </div>
