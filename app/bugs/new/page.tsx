@@ -30,6 +30,17 @@ const NewBugPage = () => {
     resolver : zodResolver(createIssueSchema)
   });
 
+  const onSubmit= handleSubmit(async (data) => {
+    try {
+      setIsSubmitting(true);
+      await axios.post("/api/bugs", data);
+      router.push("/bugs");
+    } catch (error) {
+      setIsSubmitting(false);
+      setErrorShow("An unexpected error occured");
+    }
+  })
+
   return (
     <div className="max-w-xl space-y-3">
       {errorShow && (
@@ -43,16 +54,7 @@ const NewBugPage = () => {
         </Callout.Root>
       )}
       <form className="space-y-3"
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            setIsSubmitting(true);
-            await axios.post("/api/bugs", data);
-            router.push("/bugs");
-          } catch (error) {
-            setIsSubmitting(false);
-            setErrorShow("An unexpected error occured");
-          }
-        })}
+        onSubmit={onSubmit}
       >
         <TextField.Root
           variant="classic"
