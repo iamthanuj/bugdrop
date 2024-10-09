@@ -18,16 +18,29 @@ const BugsPage = async () => {
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Created</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Status
+            </Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Created
+            </Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {bugs.map((bug) => (
             <Table.Row key={bug.id}>
-              <Table.Cell>{bug.title}</Table.Cell>
-              <Table.Cell><BugStatusBadge status={bug.status} /></Table.Cell>
-              <Table.Cell>{bug.createdAt.toDateString()}</Table.Cell>
+              <Table.Cell>
+                {bug.title}
+                <div className="md:hidden">
+                  <BugStatusBadge status={bug.status} />
+                </div>
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                <BugStatusBadge status={bug.status} />
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                {bug.createdAt.toDateString()}
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
