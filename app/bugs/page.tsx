@@ -30,7 +30,9 @@ const BugsPage = async () => {
           {bugs.map((bug) => (
             <Table.Row key={bug.id}>
               <Table.Cell>
+                <Link href={`/bugs/${bug.id}`}>
                 {bug.title}
+                </Link>
                 <div className="md:hidden">
                   <BugStatusBadge status={bug.status} />
                 </div>
