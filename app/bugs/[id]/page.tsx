@@ -1,4 +1,6 @@
+import BugStatusBadge from "@/app/components/BugStatusBadge";
 import prisma from "@/prisma/client";
+import { Box, Card, Heading, TextArea } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -15,12 +17,13 @@ const BugDetailsPage = async ({ params }: Props) => {
 
   return (
     <div>
-        <p>{bug.title}</p>
-        <p>{bug.description}</p>
-        <p>{bug.status}</p>
-        <p>{bug.createdAt.toDateString()}</p>
+      <Heading>{bug.title}</Heading>
+      <BugStatusBadge status={bug.status} />
+      <p>{bug.createdAt.toDateString()}</p>
+      <Card><p>{bug.description}</p></Card>
+      
     </div>
-  )
+  );
 };
 
 export default BugDetailsPage;
