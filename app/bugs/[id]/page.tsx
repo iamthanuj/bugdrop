@@ -16,7 +16,7 @@ const BugDetailsPage = async ({ params }: Props) => {
   if (!bug) notFound();
 
   return (
-    <div>
+    <div className="w-full flex-row justify-center">
       <Heading>{bug.title}</Heading>
       <BugStatusBadge status={bug.status} />
       <p>{bug.createdAt.toDateString()}</p>
