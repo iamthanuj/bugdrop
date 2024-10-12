@@ -10,6 +10,7 @@ import {
 } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import React from "react";
+import Markdown from "react-markdown";
 
 interface Props {
   params: { id: string };
@@ -32,8 +33,8 @@ const BugDetailsPage = async ({ params }: Props) => {
             Status: <BugStatusBadge status={bug.status} />
           </p>
         </Blockquote>
-        <Card>
-          <p>{bug.description}</p>
+        <Card className="prose">
+          <Markdown>{bug.description}</Markdown>
         </Card>
       </Flex>
     </div>
