@@ -1,6 +1,13 @@
 import BugStatusBadge from "@/app/components/BugStatusBadge";
 import prisma from "@/prisma/client";
-import { Box, Card, Heading, TextArea } from "@radix-ui/themes";
+import {
+  Blockquote,
+  Box,
+  Card,
+  Flex,
+  Heading,
+  TextArea,
+} from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -17,11 +24,18 @@ const BugDetailsPage = async ({ params }: Props) => {
 
   return (
     <div className="w-full flex-row justify-center">
-      <Heading>{bug.title}</Heading>
-      <BugStatusBadge status={bug.status} />
-      <p>{bug.createdAt.toDateString()}</p>
-      <Card><p>{bug.description}</p></Card>
-      
+      <Flex direction={"column"} gap={"2"}>
+        <Heading>{bug.title}</Heading>
+        <Blockquote size={"3"}>
+          <p>Created Date:{bug.createdAt.toDateString()}</p>
+          <p>
+            Status: <BugStatusBadge status={bug.status} />
+          </p>
+        </Blockquote>
+        <Card>
+          <p>{bug.description}</p>
+        </Card>
+      </Flex>
     </div>
   );
 };
