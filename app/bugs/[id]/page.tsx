@@ -1,13 +1,6 @@
 import BugStatusBadge from "@/app/components/BugStatusBadge";
 import prisma from "@/prisma/client";
-import {
-  Blockquote,
-  Box,
-  Card,
-  Flex,
-  Heading,
-  TextArea,
-} from "@radix-ui/themes";
+import { Blockquote, Card, Flex, Heading } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import React from "react";
 import Markdown from "react-markdown";
