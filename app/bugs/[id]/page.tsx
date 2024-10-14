@@ -4,6 +4,7 @@ import { Blockquote, Card, Flex, Heading } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import React from "react";
 import Markdown from "react-markdown";
+import delay from "delay";
 
 interface Props {
   params: { id: string };
@@ -15,6 +16,9 @@ const BugDetailsPage = async ({ params }: Props) => {
   });
 
   if (!bug) notFound();
+
+  delay(4000)
+
 
   return (
     <div className="w-full flex-row justify-center">

@@ -13,11 +13,13 @@ import {createIssueSchema} from "@/app/validationSchemas"
 import {z} from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
+import NewBugLoadingPage from "./loading";
+import delay from "delay";
 
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
-  loading: () => <p>Loading...</p>,
+  loading: () => <NewBugLoadingPage/>,
 });
 
 type BugForm = z.infer<typeof createIssueSchema>
@@ -40,6 +42,8 @@ const NewBugPage = () => {
       setErrorShow("An unexpected error occured");
     }
   })
+
+  delay(2000)
 
   return (
     <div className="max-w-xl space-y-3">
