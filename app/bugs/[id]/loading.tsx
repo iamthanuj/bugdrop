@@ -9,8 +9,8 @@ const BugDetailsLoading = () => {
       <Flex direction={"column"} gap={"2"}>
         <Skeleton width="300px" height="30px"/>
         <Blockquote size={"3"}>
-          <Skeleton width="300px" height="20px"/>
-          <Skeleton width="300px" height="20px"/>
+          <Skeleton width="300px" height="15px"/>
+          <Skeleton width="300px" height="15px"/>
         </Blockquote>
         <Card className="prose">
           <Skeleton  height="40px"/>
