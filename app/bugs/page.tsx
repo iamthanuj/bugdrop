@@ -3,7 +3,7 @@ import { Table } from "@radix-ui/themes";
 import prisma from "@/prisma/client";
 import BugStatusBadge from "../components/BugStatusBadge";
 import BugActionBtn from "./BugActionBtn";
-import Link from "../components/Link";
+import {Link} from "../components";
 
 const BugsPage = async () => {
   const bugs = await prisma.bug.findMany();

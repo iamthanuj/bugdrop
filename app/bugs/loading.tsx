@@ -1,9 +1,5 @@
-import { Button, Table } from "@radix-ui/themes";
-import Link from "next/link";
-import React from "react";
-import BugStatusBadge from "../components/BugStatusBadge";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+import { Skeleton } from '@/app/components';
+import { Table } from "@radix-ui/themes";
 import BugActionBtn from "./BugActionBtn";
 
 const LoadingBugsPage = () => {
