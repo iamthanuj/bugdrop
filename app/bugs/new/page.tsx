@@ -19,7 +19,7 @@ import delay from "delay";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
-  loading: () => <NewBugLoadingPage/>,
+  loading: () => <NewBugLoadingPage/>
 });
 
 type BugForm = z.infer<typeof createIssueSchema>
