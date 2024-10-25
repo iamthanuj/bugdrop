@@ -1,6 +1,6 @@
 import {BugStatusBadge} from "@/app/components"
 import prisma from "@/prisma/client";
-import { Blockquote, Card, Flex, Heading } from "@radix-ui/themes";
+import { Blockquote, Card, Flex, Grid, Heading } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 
@@ -17,7 +17,7 @@ const BugDetailsPage = async ({ params }: Props) => {
 
 
   return (
-    <div className="w-full flex-row justify-center">
+    <Grid className="w-full flex-row justify-center">
       <Flex direction={"column"} gap={"2"}>
         <Heading>{bug.title}</Heading>
         <Blockquote size={"3"}>
@@ -30,7 +30,7 @@ const BugDetailsPage = async ({ params }: Props) => {
           <Markdown>{bug.description}</Markdown>
         </Card>
       </Flex>
-    </div>
+    </Grid>
   );
 };
 
