@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "@radix-ui/themes";
 import prisma from "@/prisma/client";
-import BugStatusBadge from "../components/BugStatusBadge";
+import {BugStatusBadge} from "@/app/components"
 import BugActionBtn from "./BugActionBtn";
 import {Link} from "../components";
 
