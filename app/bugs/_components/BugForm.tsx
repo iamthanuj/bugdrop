@@ -15,34 +15,42 @@ import { z } from "zod";
 import NewBugLoadingPage from "@/app/bugs/new/loading";
 import { Bug } from "@prisma/client";
 
-
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
-  loading: () => <NewBugLoadingPage/>
+  loading: () => <NewBugLoadingPage />,
 });
 
-type BugFormData = z.infer<typeof bugSchema>
+type BugFormData = z.infer<typeof bugSchema>;
 
-
-
-const BugForm = ({bug}:{bug?:Bug}) => {
+const BugForm = ({ bug }: { bug?: Bug }) => {
   const [errorShow, setErrorShow] = useState("");
-  const [isSubmitting,setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const { control, register, handleSubmit, formState:{ errors } } = useForm<BugFormData>({
-    resolver : zodResolver(bugSchema)
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<BugFormData>({
+    resolver: zodResolver(bugSchema),
   });
 
-  const onSubmit= handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true);
-      await axios.post("/api/bugs", data);
+
+      if (bug) {
+        await axios.patch("/api/bugs/" + bug.id, data);
+      } else {
+        await axios.post("/api/bugs", data);
+      }
+
       router.push("/bugs");
     } catch (error) {
       setIsSubmitting(false);
       setErrorShow("An unexpected error occured");
     }
-  })
+  });
 
   return (
     <div className="max-w-xl space-y-3">
@@ -51,16 +59,12 @@ const BugForm = ({bug}:{bug?:Bug}) => {
           <Callout.Icon>
             <InfoCircledIcon />
           </Callout.Icon>
-          <Callout.Text>
-            {errorShow}
-          </Callout.Text>
+          <Callout.Text>{errorShow}</Callout.Text>
         </Callout.Root>
       )}
-      <form className="space-y-3"
-        onSubmit={onSubmit}
-      >
+      <form className="space-y-3" onSubmit={onSubmit}>
         <TextField.Root
-        defaultValue={bug?.title}
+          defaultValue={bug?.title}
           variant="classic"
           placeholder="Title"
           {...register("title")}
@@ -75,7 +79,10 @@ const BugForm = ({bug}:{bug?:Bug}) => {
           )}
         />
         {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
-        <Button disabled={isSubmitting} >Submit New Bug{isSubmitting && <Spinner/>}</Button>
+        <Button disabled={isSubmitting}>
+          {bug ? "Update Bug" : "Submit New Bug"}{' '}
+          {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
