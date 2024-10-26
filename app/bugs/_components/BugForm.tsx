@@ -1,7 +1,7 @@
 "use client";
 
 import { ErrorMessage, Spinner } from "@/app/components";
-import { createIssueSchema } from "@/app/validationSchemas";
+import { bugSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { Button, Callout, TextField } from "@radix-ui/themes";
@@ -21,7 +21,7 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   loading: () => <NewBugLoadingPage/>
 });
 
-type BugFormData = z.infer<typeof createIssueSchema>
+type BugFormData = z.infer<typeof bugSchema>
 
 
 
@@ -30,7 +30,7 @@ const BugForm = ({bug}:{bug?:Bug}) => {
   const [isSubmitting,setIsSubmitting] = useState(false)
   const router = useRouter();
   const { control, register, handleSubmit, formState:{ errors } } = useForm<BugFormData>({
-    resolver : zodResolver(createIssueSchema)
+    resolver : zodResolver(bugSchema)
   });
 
   const onSubmit= handleSubmit(async (data) => {
