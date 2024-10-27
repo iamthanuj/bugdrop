@@ -1,16 +1,15 @@
 "use client"
 
-import React from 'react'
+import logo from "@/public/svg-formatter-beautifier-_2_.png"
+import classNames from 'classnames'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import classNames from 'classnames'
-import logo from "@/public/svg-formatter-beautifier-_2_.png"
-import Image from 'next/image'
 
 
 const NavBar = () => {
 
-    const pathName = usePathname();``
+    const pathName = usePathname();
 
     const links = [
         {label: "Dashboard", href:'/'},

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import {bugSchema} from "@/app/validationSchemas"
 import prisma from "@/prisma/client";
 

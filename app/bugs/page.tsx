@@ -48,4 +48,6 @@ const BugsPage = async () => {
   );
 };
 
+export const dynamic = 'force-dynamic';
+
 export default BugsPage;

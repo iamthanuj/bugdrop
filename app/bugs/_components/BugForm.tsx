@@ -1,8 +1,10 @@
 "use client";
 
+import NewBugLoadingPage from "@/app/bugs/new/loading";
 import { ErrorMessage, Spinner } from "@/app/components";
 import { bugSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Bug } from "@prisma/client";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
@@ -12,8 +14,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
-import NewBugLoadingPage from "@/app/bugs/new/loading";
-import { Bug } from "@prisma/client";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -46,9 +46,10 @@ const BugForm = ({ bug }: { bug?: Bug }) => {
       }
 
       router.push("/bugs");
+      router.refresh();
     } catch (error) {
       setIsSubmitting(false);
-      setErrorShow("An unexpected error occured");
+      setErrorShow("An unexpected error occured"+error);
     }
   });
 
