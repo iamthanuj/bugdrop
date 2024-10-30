@@ -6,7 +6,7 @@ import BugActionBtn from "./BugActionBtn";
 import {Link} from "../components";
 
 const BugsPage = async () => {
-  const bugs = await prisma.bug.findMany();
+  const bugs = await prisma.bug.findMany()
 
   return (
     <div>
