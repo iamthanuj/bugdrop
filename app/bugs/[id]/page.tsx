@@ -1,5 +1,5 @@
 import prisma from "@/prisma/client";
-import { Flex, Grid } from "@radix-ui/themes";
+import { Box, Flex, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import EditBugButton from "./EditBugButton";
 import BugDetails from "./BugDetails";
@@ -17,11 +17,11 @@ const BugDetailsPage = async ({ params }: Props) => {
   if (!bug) notFound();
 
   return (
-    <Grid columns={{ initial: "1", md: "2" }} gap={"5"}>
-      <Flex direction={"column"} gap={"2"}>
+    <Grid columns={{ initial: "1", sm: "5" }} gap={"5"}>
+      <Flex className="md:col-span-4" direction={"column"} gap={"2"}>
         <BugDetails bug={bug} />
       </Flex>
-      <Flex gap={"5rem"}>
+      <Flex direction={"column"} gap={"10px"}>
         <EditBugButton bugId={bug.id} />
         <DeleteBugButton bugId={bug.id} />
       </Flex>

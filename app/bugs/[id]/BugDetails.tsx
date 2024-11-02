@@ -14,7 +14,7 @@ const BugDetails = ({bug}:{bug:Bug}) => {
           Status: <BugStatusBadge status={bug.status} />
         </p>
       </Blockquote>
-      <Card className="prose">
+      <Card className="prose max-w-full">
         <Markdown>{bug.description}</Markdown>
       </Card>
     </>
