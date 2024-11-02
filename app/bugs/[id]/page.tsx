@@ -21,7 +21,7 @@ const BugDetailsPage = async ({ params }: Props) => {
       <Flex direction={"column"} gap={"2"}>
         <BugDetails bug={bug} />
       </Flex>
-      <Flex>
+      <Flex gap={"5rem"}>
         <EditBugButton bugId={bug.id} />
         <DeleteBugButton bugId={bug.id} />
       </Flex>
