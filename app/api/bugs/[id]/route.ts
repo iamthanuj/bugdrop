@@ -32,3 +32,25 @@ export async function PATCH(
 
   return NextResponse.json(updatedBug)
 }
+
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+){
+  const bug =  await prisma.bug.findUnique({
+    where:{
+        id:parseInt(params.id)
+    }
+  })
+
+  if(!bug){
+    return NextResponse.json({error:'Invalide bug'}, {status:404})
+  }
+
+  await prisma.bug.delete({
+    where:{id:bug.id}
+  })
+
+  return NextResponse.json({})
+}
