@@ -3,8 +3,13 @@
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import React from "react";
 import { TrashIcon } from "@radix-ui/react-icons";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const DeleteBugButton = ({ bugId }: { bugId: number }) => {
+
+  const router = useRouter();
+
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
@@ -21,7 +26,11 @@ const DeleteBugButton = ({ bugId }: { bugId: number }) => {
             <Button color="gray" variant="soft">Close</Button>
           </AlertDialog.Cancel>
           <AlertDialog.Action>
-            <Button color="red">Confirm</Button>
+            <Button color="red" onClick={async ()=>{
+              await axios.delete("/api/bugs/"+bugId);
+              router.push('/bugs');
+              router.refresh();
+            }}>Confirm</Button>
           </AlertDialog.Action>
         </Flex>
       </AlertDialog.Content>
