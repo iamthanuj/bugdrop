@@ -1,6 +1,7 @@
 import { bugSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import delay from "delay";
 
 export async function PATCH(
   request: NextRequest,
@@ -38,6 +39,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ){
+
   const bug =  await prisma.bug.findUnique({
     where:{
         id:parseInt(params.id)

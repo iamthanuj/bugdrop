@@ -5,18 +5,22 @@ import React, { useState } from "react";
 import { TrashIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Spinner } from "@/app/components";
 
 const DeleteBugButton = ({ bugId }: { bugId: number }) => {
   const router = useRouter();
 
   const [error, setError] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const deleteBug = async () => {
     try {
+      setIsDeleting(true);
       await axios.delete("/api/bugs/" + bugId);
       router.push("/bugs");
       router.refresh();
     } catch (error) {
+      setIsDeleting(false);
       setError(true);
     }
   };
@@ -25,9 +29,10 @@ const DeleteBugButton = ({ bugId }: { bugId: number }) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red">
+          <Button color="red" disabled={isDeleting}>
             <TrashIcon />
             Delete
+            {isDeleting && <Spinner/>}
           </Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content>
