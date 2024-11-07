@@ -1,5 +1,5 @@
 import prisma from "@/prisma/client";
-import { Box, Flex, Grid } from "@radix-ui/themes";
+import { Flex, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import EditBugButton from "./EditBugButton";
 import BugDetails from "./BugDetails";

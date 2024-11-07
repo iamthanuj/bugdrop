@@ -41,7 +41,7 @@ const BugForm = ({ bug }: { bug?: Bug }) => {
         await axios.post("/api/bugs", data);
       }
 
-      router.push("/bugs");
+      router.push("/bugs/list");
       router.refresh();
     } catch (error) {
       setIsSubmitting(false);
