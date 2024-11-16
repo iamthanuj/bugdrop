@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ExitIcon, EnterIcon } from "@radix-ui/react-icons";
 
 const NavBar = () => {
   const pathName = usePathname();
@@ -22,7 +23,7 @@ const NavBar = () => {
       <Link href="/">
         <Image src={logo} alt="logo" width={150} />
       </Link>
-      <div className="flex gap-10">
+      <div className="flex gap-10 items-center">
         <ul className="flex gap-5">
           {links.map((link) => (
             <li key={link.href}>
@@ -40,8 +41,22 @@ const NavBar = () => {
           ))}
         </ul>
         <Box>
-          {status === "authenticated" && (<Link href="/api/auth/signout">Log Out</Link>)}
-          {status === "unauthenticated" && (<Link href="/api/auth/signin">Log In</Link>)}
+          {status === "authenticated" && (
+            <Link
+              className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-2"
+              href="/api/auth/signout"
+            >
+              <ExitIcon/>
+              Log Out
+            </Link>
+          )}
+          {status === "unauthenticated" && (
+            <Link className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-2"
+             href="/api/auth/signin">
+              <EnterIcon/>
+              Log In
+            </Link>
+          )}
         </Box>
       </div>
     </nav>
