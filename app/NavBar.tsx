@@ -43,7 +43,7 @@ const NavBar = () => {
         <Box>
           {status === "authenticated" && (
             <Link
-              className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-2"
+              className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-3"
               href="/api/auth/signout"
             >
               <ExitIcon/>
@@ -51,7 +51,7 @@ const NavBar = () => {
             </Link>
           )}
           {status === "unauthenticated" && (
-            <Link className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-2"
+            <Link className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-3"
              href="/api/auth/signin">
               <EnterIcon/>
               Log In
