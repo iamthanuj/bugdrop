@@ -44,15 +44,11 @@ const NavBar = () => {
           {status === "authenticated" && (
             <DropdownMenu.Root>
               <DropdownMenu.Trigger>
-                <Avatar src={data.user!.image!} fallback="?" radius="full"/>
+                <Avatar src={data.user!.image!} fallback="?" radius="full" referrerPolicy="no-referrer"/>
               </DropdownMenu.Trigger>
               <DropdownMenu.Content>
-                <DropdownMenu.Label>
-                  {data.user!.name!}
-                </DropdownMenu.Label>
-                <DropdownMenu.Label>
-                  {data.user!.email!}
-                </DropdownMenu.Label>
+                <DropdownMenu.Label>{data.user!.name!}</DropdownMenu.Label>
+                <DropdownMenu.Label>{data.user!.email!}</DropdownMenu.Label>
                 <DropdownMenu.Item>
                   <Link href="/api/auth/signout/">Log Out</Link>
                 </DropdownMenu.Item>
@@ -60,9 +56,11 @@ const NavBar = () => {
             </DropdownMenu.Root>
           )}
           {status === "unauthenticated" && (
-            <Link className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-3"
-             href="/api/auth/signin">
-              <EnterIcon/>
+            <Link
+              className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-3"
+              href="/api/auth/signin"
+            >
+              <EnterIcon />
               Log In
             </Link>
           )}
