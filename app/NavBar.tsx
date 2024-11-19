@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ExitIcon, EnterIcon } from "@radix-ui/react-icons";
+import { Skeleton, Spinner } from "@/app/components";
 
 const NavBar = () => {
   return (
@@ -54,7 +55,7 @@ const NavLink = () => {
 const AuthStatus = () => {
   const { status, data } = useSession();
 
-  if (status === "loading") return null;
+  if (status === "loading") return <Spinner/> ;
 
   if (status === "unauthenticated")
     return (
