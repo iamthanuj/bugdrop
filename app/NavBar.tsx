@@ -1,7 +1,7 @@
 "use client";
 
 import logo from "@/public/svg-formatter-beautifier-_2_.png";
-import { Box } from "@radix-ui/themes";
+import { Avatar, Box, DropdownMenu } from "@radix-ui/themes";
 import classNames from "classnames";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -42,13 +42,22 @@ const NavBar = () => {
         </ul>
         <Box>
           {status === "authenticated" && (
-            <Link
-              className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-3"
-              href="/api/auth/signout"
-            >
-              <ExitIcon/>
-              Log Out
-            </Link>
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>
+                <Avatar src={data.user!.image!} fallback="?" radius="full"/>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content>
+                <DropdownMenu.Label>
+                  {data.user!.name!}
+                </DropdownMenu.Label>
+                <DropdownMenu.Label>
+                  {data.user!.email!}
+                </DropdownMenu.Label>
+                <DropdownMenu.Item>
+                  <Link href="/api/auth/signout/">Log Out</Link>
+                </DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
           )}
           {status === "unauthenticated" && (
             <Link className="text-white bg-gray-500 p-2 rounded-sm flex  items-center gap-3"
