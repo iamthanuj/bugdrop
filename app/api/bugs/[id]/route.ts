@@ -1,12 +1,20 @@
+import authOptions from "@/app/auth/authOptions";
 import { bugSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import delay from "delay";
 
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+
+  const session = await getServerSession(authOptions);
+
+  if(!session){
+    return NextResponse.json({}, {status:401});
+  }
+
   const body = await request.json();
   const validation = bugSchema.safeParse(body);
 
@@ -39,6 +47,14 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ){
+
+
+  const session = await getServerSession(authOptions);
+
+  if(!session){
+    return NextResponse.json({}, {status:401});
+  }
+
 
   const bug =  await prisma.bug.findUnique({
     where:{
